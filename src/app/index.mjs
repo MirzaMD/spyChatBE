@@ -27,19 +27,21 @@ app.use(cors({
     origin:["https://spy-chat-appmmhb.vercel.app","http://localhost:3000","http://localhost:3001","http://localhost:3002"],
     credentials:true
 }))
+
 app.use(session({
   secret: "some_secret",
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 365 * 24 * 60 * 60 * 1000,
-    secure: true,        // 🔒 must be true for HTTPS
-    sameSite: "none"     // ✅ allows cookies cross-site
+    maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
+    sameSite: "none", // ✅ Important for cross-site cookies
+    secure: true       // ✅ Required for SameSite: 'none'
   },
   store: MongoStore.create({
     client: mongoose.connection.getClient()
   })
 }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
