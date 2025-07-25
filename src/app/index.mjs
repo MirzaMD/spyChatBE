@@ -28,16 +28,19 @@ app.use(cors({
     credentials:true
 }))
 app.use(session({
-    secret:"some_secret",
-    resave:false,
-    saveUninitialized:false,
-    cookie:{
-        maxAge:24 * 60 * 60 * 1000
-    },
-    store: MongoStore.create({
-        client:mongoose.connection.getClient()
-    })
+  secret: "some_secret",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 365 * 24 * 60 * 60 * 1000,
+    secure: true,        // 🔒 must be true for HTTPS
+    sameSite: "none"     // ✅ allows cookies cross-site
+  },
+  store: MongoStore.create({
+    client: mongoose.connection.getClient()
+  })
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(userObj);
