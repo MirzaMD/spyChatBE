@@ -10,7 +10,7 @@ githubLogin.get("/auth/github",passport.authenticate("github",{
 ));
 
 githubLogin.get("/auth/github/callback",passport.authenticate("github",{
-    successRedirect:"https://spy-chat.vercel.app",
+    successRedirect:"https://spy-chat.vercel.app/land",
     failureRedirect:"/gitFailure"
 }));
 

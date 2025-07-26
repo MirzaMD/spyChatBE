@@ -10,7 +10,7 @@ discordLogin.get("/auth/discord/callback", (req, res, next) => {
   console.log("Discord callback query:", req.query); // debug
   next();
 }, passport.authenticate("discord", {
-  successRedirect: "https://spy-chat.vercel.app",
+  successRedirect: "https://spy-chat.vercel.app/land",
   failureRedirect: "/discord/failure"
 }));
 
