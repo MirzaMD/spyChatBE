@@ -3,10 +3,6 @@ import "../strategies/github.mjs";
 import passport from "passport";
 
 const githubLogin= Router();
-const ensureAuthentication=(req,res,next)=>{
-    if(req.isAuthenticated()) return next();
-    return res.sendStatus(401);
-}
 
 githubLogin.get("/auth/github",passport.authenticate("github",{
     scope: ["user:email"],

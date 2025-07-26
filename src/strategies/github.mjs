@@ -22,7 +22,7 @@ export default passport.use(new Strategy({
     clientID:process.env.GITHUB_CLIENT_ID,
     clientSecret:process.env.GITHUB_CLIENT_SECRET,
     scope:["identify","guilds","email"],
-    callbackURL:"https://spy-chat.vercel.app/auth/github/callback"
+    callbackURL:"https://spychatbe.onrender.com/auth/github/callback"
 }, async (accessToken, refreshToken, profile, done)=>{
     try{
         const user= await users.findOne({githubId:profile.id})

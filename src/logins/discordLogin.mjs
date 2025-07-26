@@ -3,13 +3,10 @@ import { Router } from "express";
 
 import passport from "passport";
 const discordLogin= Router();
-const ensureAuthenticated=(req,res,next)=>{
-    if(req.isAuthenticated()) return next();
-    return res.sendStatus(401);
-}
+
 discordLogin.get("/auth/discord",passport.authenticate("discord"));
 
-discordLogin.get("/intermediater", passport.authenticate("discord",{
+discordLogin.get("/auth/discord/callback", passport.authenticate("discord",{
   successRedirect:"https://spy-chat.vercel.app",
   failureRedirect:"/discord/failure"
 }));

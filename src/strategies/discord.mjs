@@ -22,7 +22,7 @@ export default passport.use(new Strategy({
     clientID:process.env.DISCORD_CLIENT_ID,
     clientSecret:process.env.DISCORD_CLIENT_SECRET,
     scope:["identify","guilds","email"],
-    callbackURL:"https://spy-chat.vercel.app/intermediater"
+    callbackURL:"https://spychatbe.onrender.com/auth/discord/callback"
 },async (accessToken,refreshToken,profile,done)=>{
     try{
         const user = await users.findOne({discordId:profile.id});
