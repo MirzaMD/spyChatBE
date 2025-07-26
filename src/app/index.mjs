@@ -118,12 +118,6 @@ app.get("/api/chats",async (_, res)=>{
   }
 })
 
-app.use((err, req, res, next) => {
-  console.error("Unhandled Error:", err);
-  res.status(500).json({ error: "Internal Server Error", message: err?.message });
-});
-
-
 httpServer.listen(PORT,()=>{
     console.log(`listening to http://localhost:${PORT}`);
 })
