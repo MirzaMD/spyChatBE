@@ -19,29 +19,28 @@ passport.deserializeUser(async (id, done)=>{
 })
 
 export default passport.use(new Strategy({
-    clientID:process.env.DISCORD_CLIENT_ID,
-    clientSecret:process.env.DISCORD_CLIENT_SECRET,
-    scope:["identify","guilds","email"],
-    callbackURL:"https://spychatbe.onrender.com/auth/discord/callback"
-},async (accessToken,refreshToken,profile,done)=>{
-    try{
-        const user = await users.findOne({discordId:profile.id});
-        if(!user){
-            try{
-                const newUser= await users.create({
-                    username:profile.username,
-                    discordId:profile.id,
-                    authType:"discord"
-                })
-               const saved= await newUser.save();
-               return done(null,saved); 
-            }catch(err){
-               return done(err,null)
-            }
+    clientID: process.env.DISCORD_CLIENT_ID,
+    clientSecret: process.env.DISCORD_CLIENT_SECRET,
+    scope: ["identify", "guilds", "email"],
+    callbackURL: "https://spychatbe.onrender.com/auth/discord/callback"
+}, async (accessToken, refreshToken, profile, done) => {
+    try {
+        console.log("Discord profile:", profile); // ✅ add this
+        const user = await users.findOne({ discordId: profile.id });
+
+        if (!user) {
+            const newUser = await users.create({
+                username: profile.username,
+                discordId: profile.id,
+                authType: "discord"
+            });
+            const saved = await newUser.save();
+            return done(null, saved);
         }
-        return done(null,user);
+
+        return done(null, user);
+    } catch (err) {
+        console.error("Error in Discord Strategy:", err); // ✅ add this
+        return done(err, null);
     }
-      catch(err){
-          return done(err,null);  
-        } 
-}))
+}));

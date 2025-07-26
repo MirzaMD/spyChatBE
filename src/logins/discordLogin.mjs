@@ -6,10 +6,14 @@ const discordLogin= Router();
 
 discordLogin.get("/auth/discord",passport.authenticate("discord"));
 
-discordLogin.get("/auth/discord/callback", passport.authenticate("discord",{
-  successRedirect:"https://spy-chat.vercel.app",
-  failureRedirect:"/discord/failure"
+discordLogin.get("/auth/discord/callback", (req, res, next) => {
+  console.log("Discord callback query:", req.query); // debug
+  next();
+}, passport.authenticate("discord", {
+  successRedirect: "https://spy-chat.vercel.app",
+  failureRedirect: "/discord/failure"
 }));
+
 
 discordLogin.get("/discord/succes",(req,res)=>{
   return res.status(200).json({user:req.user});

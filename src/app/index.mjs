@@ -24,7 +24,8 @@ app.use(express.json({limit:"100mb"}));
 app.use(express.urlencoded({extended:true, limit:"100mb"}));
 app.use(cors({
     methods:["GET","POST","PATCH","DELETE","PUT","OPTIONS"],
-    origin:["https://spy-chat.vercel.app","https://spy-chat-appmmhb.vercel.app" ,"http://localhost:3000","http://localhost:3001","http://localhost:3002"],
+    origin:["https://spy-chat.vercel.app","https://spy-chat-appmmhb.vercel.app"
+       ,"http://localhost:3000","http://localhost:3001","http://localhost:3002"],
     credentials:true
 }))
 
@@ -116,6 +117,12 @@ app.get("/api/chats",async (_, res)=>{
     return res.status(400).json(err);
   }
 })
+
+app.use((err, req, res, next) => {
+  console.error("Unhandled Error:", err);
+  res.status(500).json({ error: "Internal Server Error", message: err?.message });
+});
+
 
 httpServer.listen(PORT,()=>{
     console.log(`listening to http://localhost:${PORT}`);
