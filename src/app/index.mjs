@@ -24,7 +24,7 @@ app.use(express.json({limit:"100mb"}));
 app.use(express.urlencoded({extended:true, limit:"100mb"}));
 app.use(cors({
     methods:["GET","POST","PATCH","DELETE","PUT","OPTIONS"],
-    origin:["https://spy-chat-appmmhb.vercel.app" ,"http://localhost:3000","http://localhost:3001","http://localhost:3002"],
+    origin:["https://spy-chat.vercel.app","https://spy-chat-appmmhb.vercel.app" ,"http://localhost:3000","http://localhost:3001","http://localhost:3002"],
     credentials:true
 }))
 
@@ -54,7 +54,8 @@ const httpServer=http.createServer(app);
 const io=new Server(httpServer,{
     cors:{
     methods:["GET","POST","PATCH","DELETE","PUT","OPTIONS"],
-    origin:["https://spy-chat-appmmhb.vercel.app","http://localhost:3000","http://localhost:3001","http://localhost:3002"],
+    origin:["https://spy-chat.vercel.app","https://spy-chat-appmmhb.vercel.app",
+      "http://localhost:3000","http://localhost:3001","http://localhost:3002"],
     credentials:true
     }
 })

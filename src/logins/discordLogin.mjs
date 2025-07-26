@@ -10,7 +10,7 @@ const ensureAuthenticated=(req,res,next)=>{
 discordLogin.get("/auth/discord",passport.authenticate("discord"));
 
 discordLogin.get("/intermediater", passport.authenticate("discord",{
-  successRedirect:"https://spy-chat-appmmhb.vercel.app",
+  successRedirect:"https://spy-chat.vercel.app",
   failureRedirect:"/discord/failure"
 }));
 
